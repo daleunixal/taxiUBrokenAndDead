@@ -1,3 +1,5 @@
+import osmnx.graph
+
 from collectors.era_data_collector import EraDataCollector
 from controllers.epoch_controller import EpochController
 from services.client_provider_service import ClientProviderService
