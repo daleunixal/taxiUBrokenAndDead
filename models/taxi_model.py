@@ -1,23 +1,21 @@
 import random
 from dataclasses import dataclass
 
+from networkx.classes.reportviews import NodeView
+
 
 @dataclass
 class TaxiModel:
     is_busy: bool
-    gps: [float, float]
+    gps: NodeView
     is_spec_equip: bool
+    currentOrderId: str
 
-    def __init__(self, is_busy=False, gps=None):
-        if gps is None:
-            gps = [0, 0]
+    def __init__(self, is_busy=False):
         if is_busy:
             self.is_busy = True
         else:
             self.is_busy = False
-
-        if gps:
-            self.gps = gps
 
         chance = 0.1
         generated_value = random.random()
