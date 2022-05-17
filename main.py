@@ -1,16 +1,11 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from collectors.era_data_collector import EraDataCollector
+from controllers.epoch_controller import EpochController
+from services.client_provider_service import ClientProviderService
+from services.taxi_provider_service import TaxiProviderService
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+EraDataCollector.addTaxiList(TaxiProviderService.begin_model_recreate())
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+era = EpochController(EraDataCollector.taxi_bank, TaxiProviderService, ClientProviderService)
+
+era.begin_new_era(5000, 7200000)
