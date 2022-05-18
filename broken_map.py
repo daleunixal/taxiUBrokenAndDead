@@ -21,6 +21,7 @@ class GraphMap:
     __PLACE = ["Yekaterinburg, Russia"]
     __NETWORK_TYPE = 'drive'
     __IMG_FORMAT_SAVE = 'png'
+    __TRAVEL_TIME = 'travel_time'
 
     fig: int
 
@@ -42,10 +43,11 @@ class GraphMap:
         if self.fig:
             self.save_img_png()
 
-    def save_img_png(self):
-        self.fig.tight_layout(pad=0)
-        self.fig.savefig('yekaterinburg.png', dpi=300, bbox_inches='tight', format=GraphMap.__IMG_FORMAT_SAVE,
-                         facecolor=self.fig.get_facecolor(), transparent=False)
+    @classmethod
+    def save_img_png(cls):
+        cls.fig.tight_layout(pad=0)
+        cls.fig.savefig('yekaterinburg.png', dpi=300, bbox_inches='tight', format=GraphMap.__IMG_FORMAT_SAVE,
+                         facecolor=cls.fig.get_facecolor(), transparent=False)
 
     def get_random_node(self):
         self.rnd_node = random.choice(self.nodes_list)
@@ -54,13 +56,13 @@ class GraphMap:
         return self.rnd_node
 
     def get_path_time_min(self, start_point, end_point):
-        time = nx.shortest_path_length(self.G, start_point, end_point, weight='travel_time')
+        time = nx.shortest_path_length(self.G, start_point, end_point, weight=GraphMap.__TRAVEL_TIME)
         print(time)
 
         return time
 
     def get_path_dist_m(self, start_point, end_point):
-        dist = nx.shortest_path(self.G, start_point, end_point, weight='travel_time')
+        dist = nx.shortest_path(self.G, start_point, end_point, weight=GraphMap.__TRAVEL_TIME)
         print(dist)
 
         return dist
