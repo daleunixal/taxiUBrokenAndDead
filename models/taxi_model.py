@@ -6,12 +6,25 @@ from networkx.classes.reportviews import NodeView
 from models.client_model import ClientModel
 from singleton.singleton_provider import SingleMap
 
+'''
+Буду выделять свой код с двух сторон такими строчками:
+# please work #
+'''
+
 
 class TaxiModel:
     is_busy: bool
     gps: NodeView
     is_spec_equip: bool
-    currentOrderId: str
+    currentClient: ClientModel or None
+    currentTarget: NodeView or None
+    totalProgress: int
+    withClient: bool
+    # currentOrderId: str
+    # dist: float
+    # time: int
+    emptyDistance: float
+    orderCount: float
 
     def __init__(self, gps, is_spec_equip, is_busy=False):
         self.is_busy = is_busy

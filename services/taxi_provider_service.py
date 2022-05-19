@@ -2,6 +2,9 @@ import random
 
 from collectors.era_data_collector import EraDataCollector
 from models.taxi_model import TaxiModel
+# please work #
+from broken_map import GraphMap
+# please work #
 
 ####################################################
 
@@ -17,35 +20,23 @@ from singleton.singleton_provider import SingleMap
 
 
 class TaxiProviderService:
-    # please work #
-    dist: float
-    time: int
-
-    @property
-    def get_dist(self):
-        return self.dist
-
-    @get_dist.setter
-    def get_dist(self, dist):
-        self.dist = dist
-
-    @property
-    def get_time(self):
-        return self.time
-
-    @get_time.setter
-    def get_time(self, time):
-        self.time = time
-    # please work #
 
     @staticmethod
     def begin_model_recreate():
+        # please work #
+        # is_busy = False
+        # is_spec_equip = False
+
+        # graph_map = SingleMap.getGraph()
+        # strategy = graph_map.get_strategy()
+        # please work #
         taxi_container = list()
 
         for i in range(random.randint(680, 720)):
-            taxi_container.append(TaxiModel())
+            taxi_container.append(TaxiProviderService.createTaxi())
 
-        print(list)
+        taxi_container = sorted(taxi_container, key=lambda taxi_model: taxi_model.gps)
+        print(taxi_container)
 
         return taxi_container
 
@@ -61,3 +52,19 @@ class TaxiProviderService:
 
         if total_new_instance > 0:
             print('New instances of Taxi = ', total_new_instance)
+
+
+    @staticmethod
+    def createTaxi():
+
+        graph_map = SingleMap.getGraph()
+
+        chance = 0.1
+        generated_value = random.random()
+
+        if generated_value < chance:
+            is_spec_equip = True
+        else:
+            is_spec_equip = False
+
+        return TaxiModel(is_busy=False, is_spec_equip=is_spec_equip, gps=graph_map.get_random_node())
