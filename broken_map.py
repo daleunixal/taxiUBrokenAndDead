@@ -26,7 +26,8 @@ class GraphMap:
     fig: int
 
     def __init__(self):
-        self.G = ox.graph_from_place(GraphMap.__PLACE, simplify=True,
+        ox.config(use_cache=True)
+        self.G = ox.graph_from_point((56.835555, 60.600893), dist=6500, simplify=False,
                                      network_type=GraphMap.__NETWORK_TYPE, retain_all=False)
         print(self.G)
 
@@ -65,7 +66,7 @@ class GraphMap:
         dist = nx.shortest_path(self.G, start_point, end_point, weight=GraphMap.__TRAVEL_TIME)
         print(dist)
 
-        return dist
+        return sum(dist)
 
     def save_path_img_png(self, ):
         fgi, an = ox.plot_graph_route(self.G, self.get_path_dist_m())

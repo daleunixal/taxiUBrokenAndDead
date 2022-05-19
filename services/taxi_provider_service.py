@@ -8,6 +8,7 @@ from models.taxi_model import TaxiModel
 # Я у тебя тут попишу, но свой код закоментирую :з #
 
 ####################################################
+from singleton.singleton_provider import SingleMap
 
 '''
 Буду выделять свой код с двух сторон такими строчками:
@@ -56,7 +57,7 @@ class TaxiProviderService:
 
         while random.random() < chance:
             total_new_instance += 1
-            EraDataCollector.taxi_bank.append(TaxiModel())
+            EraDataCollector.taxi_bank.append(TaxiProviderService.createTaxi())
 
         if total_new_instance > 0:
             print('New instances of Taxi = ', total_new_instance)
